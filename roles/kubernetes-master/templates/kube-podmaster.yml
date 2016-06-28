@@ -37,6 +37,9 @@ spec:
       readOnly: true
     - mountPath: /dst/manifests
       name: manifest-dst
+    - mountPath: /etc/pki
+      name: etc-pki
+      readOnly: true
   volumes:
   - hostPath:
       path: /srv/kubernetes/manifests
@@ -44,3 +47,6 @@ spec:
   - hostPath:
       path: {{ kube_manifest_dir }}
     name: manifest-dst
+  - name: etc-pki
+    hostPath:
+      path: /etc/pki
