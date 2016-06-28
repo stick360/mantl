@@ -1,9 +1,4 @@
 ---
-- include: secrets.yml
-  tags:
-    - secrets
-    - kubernetes
-
 - name: download kubernetes binaries
   sudo: yes
   get_url:

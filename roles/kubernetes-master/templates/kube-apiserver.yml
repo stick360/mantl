@@ -19,10 +19,10 @@ spec:
     - --insecure_port={{ kube_insecure_port }}
     - --advertise-address={{ ansible_default_ipv4.address }}
     - --admission-control=NamespaceLifecycle,NamespaceExists,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota
-    - --tls-cert-file={{ kube_cert_dir }}/server.crt
-    - --tls-private-key-file={{ kube_cert_dir }}/server.key
-    - --client-ca-file={{ kube_cert_dir }}/ca.crt
-    - --service-account-key-file={{ kube_cert_dir }}/server.key
+    - --tls-cert-file={{ host_cert }}
+    - --tls-private-key-file={{ host_key }}
+    - --client-ca-file=/etc/pki/CA/ca.cert
+    - --service-account-key-file={{ host_key }}
     - --basic-auth-file={{ kube_users_dir }}/known_users.csv
     - --runtime-config=extensions/v1beta1/daemonsets=true
     - --v={{kube_log_level}}
