@@ -22,7 +22,6 @@
     vault write {{ vault_command_options }}
     auth/cert/certs/mantl-ca
     display_name=mantl-ca
-    policies=tls-auth
     certificate=@/etc/pki/CA/ca.cert
 
 - name: authenticate with vault using cert
