@@ -10,9 +10,9 @@ From `Kubernetes.io <http://kubernetes.io>`_:
     and scaling of containerized applications.
 
 Since version 1.1, Mantl ships Kubernetes by default. All you need to do is set
-the ``kubeworker_count`` and ``kubeworker_type`` variables in your Terraform 
-configuration (see the example Terraform configurations for where this variable integrates into the
-workflow.)
+the ``kubeworker_count`` and ``kubeworker_type`` variables in your Terraform
+configuration (see the example Terraform configurations for where this variable
+integrates into the workflow.)
 
 `kubectl` is installed and configured for the default SSH user on the control
 nodes. Please refer to the `Kubernetes getting started documentation
@@ -23,3 +23,14 @@ To talk to the services launched inside Kubernetes, launch them with the
 <https://aster.is/blog/2016/03/11/the-hamburger-of-kubernetes-service-types/>`_),
 then connect on the assigned port on any Kubernetes worker node. Consul service
 integration will happen in a future release.
+
+Currently, services cannot be exposed to the internet (tracked on issue #1429).
+
+DNS Outline
+-----------
+
+Every node in the cluster hosts etcd and skydns instances. All DNS queries for
+the .local zone are resolved locally. If a container asks for name in .local
+domain, the request is routed through dnsmasq to skydns, which accesses data
+stored in etcd. Updates for container dns names are managed by kube2sky, which
+acts upon kubeapi events.
